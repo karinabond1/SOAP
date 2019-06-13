@@ -1,0 +1,41 @@
+<form>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="mark">Mark:</label>
+        <input type="text" class="form-control" id="mark" placeholder="Enter part of mark" [(ngModel)]="filter.mark"  [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="mark">Model:</label>
+        <input type="text" class="form-control" id="model" placeholder="Enter part of model" [(ngModel)]="filter.model"  [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="mark">Year:</label>
+        <input type="number" required step="1" min="1900" max="2100" class="form-control" id="year" placeholder="Enter year" [(ngModel)]="filter.year"  [ngModelOptions]="{standalone: true}">
+      </div>      
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="mark">color:</label>
+        <input type="text" class="form-control" id="color" placeholder="Enter part of color" [(ngModel)]="filter.color"  [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="mark">Engine:</label>
+        <input type="number" step="0.1" min="0" max="10" class="form-control" id="engine" placeholder="Enter engine" [(ngModel)]="filter.engine"  [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="mark">Maxspeed:</label>
+        <input type="number" step="1" min="1" max="500" class="form-control" id="maxspeed" placeholder="Enter maxspeed" [(ngModel)]="filter.maxspeed"  [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="mark">Price:</label>
+        <input type="number" step="1" min="1" class="form-control" id="price" placeholder="Enter price" [(ngModel)]="filter.price"  [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary" (click)="Filtered()"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>      
+    </div>
+  </div>
+</form>

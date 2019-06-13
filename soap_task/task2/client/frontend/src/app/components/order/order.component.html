@@ -1,0 +1,16 @@
+<h3>Order This car:</h3>
+<form>
+  <div class="form-group">
+    <label for="firstname">First Name:</label>
+    <input type="text" class="form-control" required id="firstname" placeholder="Enter firstname" [(ngModel)]="order.firstname"  [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="form-group">
+    <label for="lastname">Last Name:</label>
+    <input type="text" class="form-control" required id="lastname" placeholder="Enter lastname" [(ngModel)]="order.lastname"  [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="form-group">
+     <input type="radio" value="credit card" name="payment" [(ngModel)]="order.payment"> Credit card
+     <input type="radio" value="cash" name="payment" [(ngModel)]="order.payment"> Cash
+  </div>
+  <button class="btn btn-primary" (click)="onOrder()">Order</button>
+</form>

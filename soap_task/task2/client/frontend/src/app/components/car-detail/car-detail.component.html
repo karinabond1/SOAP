@@ -1,0 +1,36 @@
+<div class="row" *ngIf="car.id">
+  <div class="col">
+    <h2 class="text-center">
+      Car #{{car.id}}
+    </h2>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="font-weight-bold">ID:</span> {{car.id}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">mark:</span> {{car.mark}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">model:</span> {{car.model}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">year:</span> {{car.year}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">color:</span> {{car.color}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">engine:</span> {{car.engine}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">maxspeed:</span> {{car.maxspeed}}
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">price:</span> {{car.price}}
+      </li> 
+    </ul>
+  </div>
+  <div class="col">
+    <app-order [carid]="car.id"></app-order>
+  </div>
+</div>
