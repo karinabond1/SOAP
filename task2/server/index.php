@@ -1,9 +1,12 @@
 <?php
-include 'libs/server/SQL.php';
-include 'libs/server/DB.php';
-include 'libs/server/SoapServer.php';
+include 'config.php';
+include 'DB.php';
+include 'SoapServer.php';
 
 
+$autoshop = new DB;
+$cars = $autoshop->getAllCars();
+$carInfo = $autoshop->getCarInfo();
 
 include 'templates/index.php';
 ?>
