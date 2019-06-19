@@ -14,7 +14,7 @@ class DB
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-            $selectCars = $mysql->prepare("SELECT id, brand_id, model FROM autoshop_cars;");
+            $selectCars = $mysql->prepare("SELECT autoshop_cars.model, autoshop_brand.brand FROM autoshop_cars inner join autoshop_brand on autoshop_cars.brand_id=autoshop_brand.id;");
             $selectCars->execute();
 
             $selectBrands = $mysql->prepare("SELECT id, brand FROM autoshop_brand;");
@@ -51,18 +51,20 @@ class DB
     {
         $id = 2;
         $cars = array();
-        $brand = array();
+        //$brand = array();
         $result = array();
-        $colorId = array();
+        //$colorId = array();
         $color = array();
         try {
 
             $mysql = new PDO("mysql:host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE , USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-            $selectCarinfo = $mysql->prepare("SELECT id, brand_id, model, year_issue, engin_capacity, max_speed, price FROM autoshop_cars WHERE id = ".$id);
+            //select autoshop_cars.model, autoshop_cars.year_issue, autoshop_brand.brand from autoshop_cars inner join autoshop_brand on autoshop_cars.brand_id=autoshop_brand.id
+            
+            $selectCarinfo = $mysql->prepare("SELECT autoshop_cars.model, autoshop_cars.year_issue, autoshop_cars.engin_capacity, autoshop_cars.max_speed, autoshop_cars.price, autoshop_brand.brand FROM autoshop_cars inner join autoshop_brand on autoshop_cars.brand_id=autoshop_brand.id WHERE autoshop_cars.id = ".$id);
             $selectCarinfo->execute();
+            /*$selectCarinfo = $mysql->prepare("SELECT id, brand_id, model, year_issue, engin_capacity, max_speed, price FROM autoshop_cars WHERE id = ".$id);
+            $selectCarinfo->execute();*/
 
             $indexCar = 0;
             while ($row = $selectCarinfo->fetch(PDO::FETCH_ASSOC)) {
@@ -70,7 +72,7 @@ class DB
                 $indexCar++;
             }
 
-            $selectBrand = $mysql->prepare("SELECT brand FROM autoshop_brand WHERE id = ".$cars[0][brand_id]);
+            /*$selectBrand = $mysql->prepare("SELECT brand FROM autoshop_brand WHERE id = ".$cars[0][brand_id]);
             $selectBrand->execute();         
             
             $indexBrand = 0;
@@ -78,31 +80,27 @@ class DB
                 $brand[$indexBrand] = $row;
                 $indexBrand++;
             }            
-
-            $selectColorId = $mysql->prepare("SELECT color_id FROM autoshop_car_color WHERE car_id = ".$cars[0][id]);
-            $selectColorId->execute(); 
-            $indexColorid = 0;
-            while ($row = $selectColorId->fetch(PDO::FETCH_ASSOC)) {
-                $colorId[$indexColorid] = $row;
-                $indexColorid++;
-            }
-
-            $selectColor = $mysql->prepare("SELECT color FROM autoshop_color WHERE id = ".$colorId[0][color_id]);
+*/
+            $selectColor = $mysql->prepare("SELECT autoshop_color.color FROM autoshop_color INNER JOIN autoshop_car_color ON autoshop_color.id=autoshop_car_color.color_id WHERE autoshop_car_color.car_id = ".$id.";");
             $selectColor->execute(); 
-            $indexColor = 0;
+            //$indexColor = 0;
             while ($row = $selectColor->fetch(PDO::FETCH_ASSOC)) {
-                $color[$indexColor] = $row;
-                $indexColor++;
+                $cars[$indexCar] = $row;
+                $indexCar++;
             }
-
-            array_push($result,$cars);
-            array_push($result,$brand);
-            array_push($result,$color);
-            //var_dump($result);
+            /*array_push($result,$cars);
+            //array_push($result,$brand);
+            array_push($result,$color);*/
+            var_dump($cars);
 
         } catch (PDOException $e) {
             echo $str = 'Error:+ ' . $e->getMessage();
         }
         return $result;
+    }
+
+    public function find($arr)
+    {
+
     }
 }
